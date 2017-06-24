@@ -30,8 +30,8 @@ public class PlayerMovement : MonoBehaviour {
 		
 		return d < 1f;
 	}
-	
-	private void FreezePlayerMovement()
+
+	public void FreezePlayerMovement()
 	{
 		if (movement_frozen_)
 		{
@@ -43,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
 		movement_frozen_ = true;
 	}
 
-	private void UnfreezePlayerMovement()
+	public void UnfreezePlayerMovement()
 	{
 		if (!movement_frozen_)
 		{

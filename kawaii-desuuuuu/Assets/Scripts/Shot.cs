@@ -27,6 +27,8 @@ public class Shot : MonoBehaviour {
 		rb_ = GetComponent<Rigidbody2D>();
 		sprite_renderer_ = GetComponent<SpriteRenderer>();
 		tr_ = GetComponent<TrailRenderer>();
+		Power = 0f;
+		UpdateShotState();
 	}
 	
 	// Update is called once per frame

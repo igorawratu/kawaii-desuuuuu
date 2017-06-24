@@ -11,6 +11,7 @@ public class Shooter : MonoBehaviour {
 
 	private Shot current_shot_= null;
 	private Animator animator_;
+	public Rigidbody2D rb_;
 
 	public bool Charging
 	{
@@ -19,7 +20,6 @@ public class Shooter : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		animator_ = GetComponentInParent<Animator>();
-		
 	}
 	
 	// Update is called once per frame
@@ -34,7 +34,6 @@ public class Shooter : MonoBehaviour {
 			if (current_shot_ == null)
 			{
 				var shot = Instantiate(shot_prefab_);
-				//shot.transform.parent = gameObject.transform;
 				shot.transform.position = gameObject.transform.position;
 				current_shot_ = shot.GetComponent<Shot>();
 			}
@@ -47,10 +46,12 @@ public class Shooter : MonoBehaviour {
 		{
 			if (current_shot_ != null)
 			{
-				current_shot_.Fire(new Vector2(mouse_cursor_.transform.position.x, 
-					mouse_cursor_.transform.position.y));
+				var dir = new Vector2(mouse_cursor_.transform.position.x,
+					mouse_cursor_.transform.position.y);
+				current_shot_.Fire(dir);
+				rb_.AddForce(-dir * current_shot_.Power);
 				current_shot_ = null;
-				animator_.SetTrigger("shoot");
+				animator_.SetTrigger("shoot");	
 			}
 		}
 	}

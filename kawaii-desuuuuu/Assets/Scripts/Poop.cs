@@ -5,6 +5,7 @@ using UnityEngine;
 public class Poop : MonoBehaviour {
 	public float lifetime_ = 10f;
 	public GameObject effect_;
+	public GameObject poop_sound_;
 
 	private float curr_life_ = 0f;
 
@@ -28,7 +29,7 @@ public class Poop : MonoBehaviour {
 		health.DecreaseHealth();
 		var e = Instantiate(effect_);
 		e.transform.position = gameObject.transform.position;
+		Instantiate(poop_sound_);
 		Destroy(gameObject);
-		
 	}
 }

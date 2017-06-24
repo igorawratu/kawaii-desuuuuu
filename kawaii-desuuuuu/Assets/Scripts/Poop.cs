@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Poop : MonoBehaviour {
 	public float lifetime_ = 10f;
+	public GameObject effect_;
 
 	private float curr_life_ = 0f;
 
@@ -25,6 +26,8 @@ public class Poop : MonoBehaviour {
 	{
 		PlayerHealth health = other.gameObject.GetComponent<PlayerHealth>();
 		health.DecreaseHealth();
+		var e = Instantiate(effect_);
+		e.transform.position = gameObject.transform.position;
 		Destroy(gameObject);
 		
 	}

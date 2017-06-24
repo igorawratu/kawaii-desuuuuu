@@ -6,6 +6,7 @@ public class CuteBadThingMovement : MonoBehaviour {
 	public float speed_ = 1f;
 	public GameObject poop_prefab_;
 	public float shitimer_ = 5f;
+	public GameObject death_effect_;
 
 	public GameObject player_ = null;
 
@@ -38,6 +39,16 @@ public class CuteBadThingMovement : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D other)
 	{
 		PlayerHealth health = other.gameObject.GetComponent<PlayerHealth>();
-		health.DecreaseHealth();
+
+		if(health != null)
+		{
+			health.DecreaseHealth();
+		}
+
+		//play sound and explosion here
+		var effect = Instantiate(death_effect_);
+		effect.transform.position = gameObject.transform.position;
+
+		Destroy(gameObject);
 	}
 }

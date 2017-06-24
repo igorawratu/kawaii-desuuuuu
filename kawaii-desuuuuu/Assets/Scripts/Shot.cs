@@ -4,14 +4,10 @@ using UnityEngine;
 
 
 public class Shot : MonoBehaviour {
-	public Sprite under_one_charging_;
-	public Sprite under_one_firing_;
-	public Sprite above_one_;
-	public Sprite above_two_;
-	public Sprite above_three_;
-
 	public float power_decay_multiplier_ = 2f;
 	public float force_multiplier_ = 10f;
+
+	private TrailRenderer tr_;
 
 	public float Power
 	{
@@ -30,6 +26,7 @@ public class Shot : MonoBehaviour {
 	void Start () {
 		rb_ = GetComponent<Rigidbody2D>();
 		sprite_renderer_ = GetComponent<SpriteRenderer>();
+		tr_ = GetComponent<TrailRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -50,33 +47,13 @@ public class Shot : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}
+
+		tr_.startWidth = 0.2f * Power;
 	}
 
 	private void UpdateSprite()
 	{
-		if(Power < 1f)
-		{
-			if (Fired)
-			{
-				sprite_renderer_.sprite = under_one_firing_;
-			}
-			else
-			{
-				sprite_renderer_.sprite = under_one_charging_;
-			}
-		}
-		else if(Power >= 1f && Power < 2f)
-		{
-			sprite_renderer_.sprite = above_one_;
-		}
-		else if(Power >= 2f && Power < 3f)
-		{
-			sprite_renderer_.sprite = above_two_;
-		}
-		else if(Power >= 3f)
-		{
-			sprite_renderer_.sprite = above_three_;
-		}
+		gameObject.transform.localScale = Vector3.one * Power;
 	}
 
 	public void Fire(Vector2 target)

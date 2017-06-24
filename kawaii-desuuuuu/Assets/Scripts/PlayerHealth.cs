@@ -15,6 +15,8 @@ public class PlayerHealth : MonoBehaviour {
 	public GameObject death_effect_;
 	public Text health_text_;
 	public GameObject player_death_;
+	public GameObject player_hurt_;
+	public GameObject endgame_;
 
 	private Vector3 orig_pos_;
 
@@ -34,6 +36,7 @@ public class PlayerHealth : MonoBehaviour {
 		}
 
 		health_text_.text = ht;
+		Instantiate(player_hurt_);
 	}
 	// Use this for initialization
 	void Start () {
@@ -66,13 +69,7 @@ public class PlayerHealth : MonoBehaviour {
 			effect.transform.position = gameObject.transform.position;
 			Destroy(gameObject);
 			Instantiate(player_death_);
-			StartCoroutine(EndGame());
+			Instantiate(endgame_);
 		}
-	}
-
-	IEnumerator EndGame()
-	{
-		yield return new WaitForSeconds(3f);
-		SceneManager.LoadScene("EndScene");
 	}
 }

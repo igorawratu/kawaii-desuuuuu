@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		rb_.gravityScale = 0f;
+		rb_.constraints = RigidbodyConstraints2D.FreezeAll;
 		movement_frozen_ = true;
 	}
 
@@ -47,6 +48,7 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		rb_.gravityScale = 5f;
+		rb_.constraints = RigidbodyConstraints2D.None;
 		movement_frozen_ = false;
 	}
 
@@ -58,6 +60,8 @@ public class PlayerMovement : MonoBehaviour {
 		}
 
 		Vector2 dir = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+		Vector2 walk_dir = new Vector2(Input.GetAxis("Horizontal"), 0f).normalized;
+
 		bool on_ground = OnGround();
 		if (on_ground)
 		{
@@ -66,9 +70,16 @@ public class PlayerMovement : MonoBehaviour {
 				rb_.velocity = Vector2.zero;
 				rb_.AddForce(dir * jump_force_);
 			}
+			else
+			{
+				Vector2 newPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y) +
+					walk_dir * ground_speed_ * Time.deltaTime;
+				gameObject.transform.position = new Vector3(newPos.x, newPos.y, 0f);
+			}
 		}
 
-
+		
+		
 	}
 
 	// Update is called once per frame

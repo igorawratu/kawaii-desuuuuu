@@ -36,7 +36,7 @@ public class PlayerHealth : MonoBehaviour {
 		}
 
 		health_text_.text = ht;
-		Instantiate(player_hurt_);
+		//Instantiate(player_hurt_);
 	}
 	// Use this for initialization
 	void Start () {

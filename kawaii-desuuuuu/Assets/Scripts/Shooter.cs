@@ -34,7 +34,6 @@ public class Shooter : MonoBehaviour {
 			if (current_shot_ == null)
 			{
 				var shot = Instantiate(shot_prefab_);
-				//shot.transform.parent = gameObject.transform;
 				shot.transform.position = gameObject.transform.position;
 				current_shot_ = shot.GetComponent<Shot>();
 			}

@@ -9,7 +9,7 @@ public class GooglyEyes : MonoBehaviour {
   	public Vector2 moveTimeRange = new Vector2(0.2f, 1f);
 	// Use this for initialization
 	void Start () {
-		originalPosition = transform.position;
+		originalPosition = transform.localPosition;
 		StartCoroutine(MoveCoroutine(originalPosition));
 	}
 	
@@ -28,11 +28,11 @@ public class GooglyEyes : MonoBehaviour {
 
 		while (time < totalTime) {
 			float f = time / totalTime;
-			transform.position = Vector3.Lerp(startPosition, toPosition, f);
+			transform.localPosition = Vector3.Lerp(startPosition, toPosition, f);
 			yield return new WaitForEndOfFrame();
 			time += Time.deltaTime;
 		}
-		transform.position = toPosition;
+		transform.localPosition = toPosition;
 
 		StartCoroutine(MoveCoroutine(toPosition));
 	}

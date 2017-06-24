@@ -64,6 +64,11 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			dir = Vector2.up;
 		}
+		else if(Mathf.Approximately(dir.y, 0f))
+		{
+			dir = new Vector2(dir.x > 0f ? 1f : -1f, 1f).normalized;
+		}
+
 		Vector2 walk_dir = new Vector2(Input.GetAxis("Horizontal"), 0f).normalized;
 
 		bool on_ground = OnGround();

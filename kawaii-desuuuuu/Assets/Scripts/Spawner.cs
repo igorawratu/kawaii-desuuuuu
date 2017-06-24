@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour {
 
 	public float spawn_timer_ = 5f;
 	public float min_spawn_timer_ = 1f;
-	public float speedup_ = 0.1f;
+	public float speedup_ = 0.01f;
 	public float displacement_ = 10f;
 
 	private float current_spawn_timer_ = 0f;

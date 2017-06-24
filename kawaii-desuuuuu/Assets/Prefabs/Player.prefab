@@ -299,7 +299,7 @@ MonoBehaviour:
   shot_prefab_: {fileID: 1555846374336668, guid: 2a687ec01f7345a45abab282e7c34b42,
     type: 2}
   mouse_cursor_: {fileID: 1436256351747120}
-  rb_: {fileID: 0}
+  rb_: {fileID: 50015041027433672}
 --- !u!114 &114829638259703216
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -319,9 +319,11 @@ MonoBehaviour:
   death_effect_: {fileID: 1109366659807518, guid: d4eee747f362d1548889892b99cc1483,
     type: 2}
   health_text_: {fileID: 0}
-  player_death_: {fileID: 0}
-  player_hurt_: {fileID: 0}
-  endgame_: {fileID: 0}
+  player_death_: {fileID: 1412642364701256, guid: 761d0320505321f4a952b2a26139ace7,
+    type: 2}
+  player_hurt_: {fileID: 1755612196170004, guid: 7ba54276af6971446a6acbd720619a84,
+    type: 2}
+  endgame_: {fileID: 1228382370269838, guid: 7d16fb6a9b9a08a4d917124999c9faaf, type: 2}
 --- !u!212 &212436511990906890
 SpriteRenderer:
   m_ObjectHideFlags: 1

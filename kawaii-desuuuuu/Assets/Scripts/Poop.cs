@@ -29,6 +29,5 @@ public class Poop : MonoBehaviour {
 		var e = Instantiate(effect_);
 		e.transform.position = gameObject.transform.position;
 		Destroy(gameObject);
-		
 	}
 }

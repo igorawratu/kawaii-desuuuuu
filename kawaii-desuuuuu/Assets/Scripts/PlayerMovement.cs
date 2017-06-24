@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour {
 	public float ground_speed_ = 1f;
 	public float jump_force_ = 5f;
 
 	private bool movement_frozen_ = false;
 	private Rigidbody2D rb_;
+	private Animator animator_;
 	// Use this for initialization
 	void Start () {
 		rb_ = GetComponent<Rigidbody2D>();
+		animator_ = GetComponent<Animator>();
 	}
 
 	private bool OnGround()
@@ -71,15 +74,22 @@ public class PlayerMovement : MonoBehaviour {
 
 		Vector2 walk_dir = new Vector2(Input.GetAxis("Horizontal"), 0f).normalized;
 
-		bool on_ground = OnGround();
+		bool on_ground = OnGround();		
+
+		animator_.SetBool("isWalking", false);
 		if (on_ground)
 		{
 			if (Input.GetKeyDown(KeyCode.Space))
 			{
 				rb_.velocity = Vector2.zero;
 				rb_.AddForce(dir * jump_force_);
+				animator_.SetBool("isJumping", true);
+			} else {
+				animator_.SetBool("isJumping", false);
+				if (walk_dir.magnitude > 0.001f) {
+					animator_.SetBool("isWalking", true);
+				}
 			}
-
 		}
 
 		Vector2 newPos = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y) +

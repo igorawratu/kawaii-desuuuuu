@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+[RequireComponent(typeof(Animator))]
 
 public class Shooter : MonoBehaviour {
 	public float max_power_ = 3.5f;
@@ -9,6 +10,7 @@ public class Shooter : MonoBehaviour {
 	public GameObject mouse_cursor_;
 
 	private Shot current_shot_= null;
+	private Animator animator_;
 
 	public bool Charging
 	{
@@ -16,6 +18,7 @@ public class Shooter : MonoBehaviour {
 	}
 	// Use this for initialization
 	void Start () {
+		animator_ = GetComponentInParent<Animator>();
 		
 	}
 	
@@ -47,6 +50,7 @@ public class Shooter : MonoBehaviour {
 				current_shot_.Fire(new Vector2(mouse_cursor_.transform.position.x, 
 					mouse_cursor_.transform.position.y));
 				current_shot_ = null;
+				animator_.SetTrigger("shoot");
 			}
 		}
 	}

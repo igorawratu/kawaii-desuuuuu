@@ -1,13 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour {
-	public int health_ = 3;
+	public int max_health_ = 5;
+	public int health_;
 
 	public float shake_ = 0f;
 	public float shake_amount_ = 0.01f;
 	public float decrease_factor_ = 0.05f;
+
+	public GameObject death_effect_;
+	public Text health_text_;
 
 	private Vector3 orig_pos_;
 
@@ -20,10 +26,18 @@ public class PlayerHealth : MonoBehaviour {
 	{
 		health_--;
 		ScreenShake();
+		string ht = "Love: ";
+		for(int i = 0; i < max_health_ - health_; ++i)
+		{
+			ht += "<3 ";
+		}
+
+		health_text_.text = ht;
 	}
 	// Use this for initialization
 	void Start () {
 		orig_pos_ = Camera.main.transform.localPosition;
+		health_ = max_health_;
 	}
 
 	private void UpdateShake()
@@ -47,7 +61,10 @@ public class PlayerHealth : MonoBehaviour {
 
 		if(health_ <= 0)
 		{
-			//end game here
+			var effect = Instantiate(death_effect_);
+			effect.transform.position = gameObject.transform.position;
+			Destroy(gameObject);
+			SceneManager.LoadScene("EndScene");
 		}
 	}
 }

@@ -34,5 +34,9 @@ public class Spawner : MonoBehaviour {
 
 		spawn_timer_ -= speedup_ * Time.deltaTime;
 		spawn_timer_ = Mathf.Max(min_spawn_timer_, spawn_timer_);
+
+		if (Input.GetKey(KeyCode.Escape)) {
+			Application.Quit();
+		}
 	}
 }

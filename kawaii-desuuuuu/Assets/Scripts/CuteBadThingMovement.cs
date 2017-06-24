@@ -7,18 +7,25 @@ public class CuteBadThingMovement : MonoBehaviour {
 	public GameObject poop_prefab_;
 	public float shitimer_ = 5f;
 	public GameObject death_effect_;
-
 	public GameObject player_ = null;
+
+	public List<GameObject> spawn_sounds_;
+	public List<GameObject> death_sounds_;
 
 	private float shit_curr_ = 0f;
 
 	// Use this for initialization
 	void Start () {
-		
+		int idx = Mathf.Min((int)(Random.value * spawn_sounds_.Count), spawn_sounds_.Count - 1);
+		Instantiate(spawn_sounds_[idx]);
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		if(player_ == null)
+		{
+			return;
+		}
 		var dir = player_.gameObject.transform.position - gameObject.transform.position;
 		dir.z = 0;
 		dir.y = 0;
@@ -48,6 +55,9 @@ public class CuteBadThingMovement : MonoBehaviour {
 		//play sound and explosion here
 		var effect = Instantiate(death_effect_);
 		effect.transform.position = gameObject.transform.position;
+
+		int idx = Mathf.Min((int)(Random.value * death_sounds_.Count), death_sounds_.Count - 1);
+		Instantiate(death_sounds_[idx]);
 
 		Destroy(gameObject);
 	}

@@ -14,6 +14,7 @@ public class PlayerHealth : MonoBehaviour {
 
 	public GameObject death_effect_;
 	public Text health_text_;
+	public GameObject player_death_;
 
 	private Vector3 orig_pos_;
 
@@ -64,7 +65,14 @@ public class PlayerHealth : MonoBehaviour {
 			var effect = Instantiate(death_effect_);
 			effect.transform.position = gameObject.transform.position;
 			Destroy(gameObject);
-			SceneManager.LoadScene("EndScene");
+			Instantiate(player_death_);
+			StartCoroutine(EndGame());
 		}
+	}
+
+	IEnumerator EndGame()
+	{
+		yield return new WaitForSeconds(3f);
+		SceneManager.LoadScene("EndScene");
 	}
 }

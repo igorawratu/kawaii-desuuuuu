@@ -7,6 +7,8 @@ public class Shot : MonoBehaviour {
 	public float power_decay_multiplier_ = 2f;
 	public float force_multiplier_ = 10f;
 
+	private TrailRenderer tr_;
+
 	public float Power
 	{
 		get; set;
@@ -24,6 +26,7 @@ public class Shot : MonoBehaviour {
 	void Start () {
 		rb_ = GetComponent<Rigidbody2D>();
 		sprite_renderer_ = GetComponent<SpriteRenderer>();
+		tr_ = GetComponent<TrailRenderer>();
 	}
 	
 	// Update is called once per frame
@@ -44,6 +47,8 @@ public class Shot : MonoBehaviour {
 				Destroy(gameObject);
 			}
 		}
+
+		tr_.startWidth = 0.2f * Power;
 	}
 
 	private void UpdateSprite()
